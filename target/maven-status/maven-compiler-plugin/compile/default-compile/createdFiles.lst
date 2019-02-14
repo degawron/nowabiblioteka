@@ -1,0 +1,4 @@
+pl\igorr\nowabiblioteka\config\RootConfig.class
+pl\igorr\nowabiblioteka\config\WebConfig.class
+pl\igorr\nowabiblioteka\config\NowaBibliotekaWebAppInitializer.class
+pl\igorr\nowabiblioteka\web\HomeController.class
