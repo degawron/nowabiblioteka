@@ -9,9 +9,10 @@
 </head>
 <body>
 	<h1>Lista Czytelników</h1>
+	<a href="<c:url value="/readers/add" />">Dodaj czytelnika</a>
 	<table>
 		<tr>
-			<th style="width: 10%">Lp.</th>
+			<th style="width: 10%">ID</th>
 			<th style="width: 25%">Imię</th>
 			<th style="width: 30%">Nazwisko</th>
 			<th style="width: 10%">Ilość wypożyczeń</th>
@@ -19,7 +20,7 @@
 			<th style="width: 15%">Akcja</th>
 		</tr>
 
-		<c:forEach items="${readersList}" var="reader">
+		<c:forEach items="${readerList}" var="reader">
 			<tr>
 				<td><c:out value="${reader.id}" /></td>
 				<td><c:out value="${reader.firstName}" /></td>

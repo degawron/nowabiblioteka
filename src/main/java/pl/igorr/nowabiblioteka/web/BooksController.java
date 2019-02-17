@@ -15,13 +15,13 @@ public class BooksController {
 	LibraryDAO library;
 
 	@Autowired
-	public BooksController (LibraryDAO library) {
+	public BooksController (LibraryDAO library) { //wstrzyknięcie DAO biblioteki
 		this.library = library;
 	}
 	
 	@RequestMapping (method = RequestMethod.GET) //obsługa żadania GET w poniższej metodzie
 	public String czytelnicy(Model model) {
-		model.addAttribute(library.listBooks());
-		return "books"; //zwracamy nazwę widoku
+		model.addAttribute(library.listBooks()); //wstawienie listy książek jako modelu
+		return "books"; //zwrócenie nazwy widoku
 	}
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>Lista Czytelników</h1>
-	<c:forEach items="${readersList}" var="reader">
+	<c:forEach items="${readerList}" var="reader">
 		<li id="czytelnik_<c:out value="${reader.id}"/>">
 			<div class="czytelnicy.nazwa" style="display: inline">
 				<c:out value="${reader.firstName}" />

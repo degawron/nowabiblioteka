@@ -19,16 +19,16 @@
 				<th style="width: 15%">Data zwrotu</th>
 			</tr>
 	
-	<c:forEach items="${borrowingsList}" var="borrowings">
+	<c:forEach items="${borrowingList}" var="borrowing">
 		<tr>
-		<td><c:out value="${borrowings.id}"/></td>
-		<td><c:out value="${borrowings.book.title}"/></td>
-		<td><c:out value="${borrowings.reader.firstName}"/> <c:out value="${borrowings.reader.lastName}"/></td>
-		<td><fmt:formatDate value="${borrowings.dateOfBorrow}" pattern="dd-MM-yyyy" /></td>
-		<td><c:out value="${borrowings.term}"/></td>
+		<td><c:out value="${borrowing.id}"/></td>
+		<td><c:out value="${borrowing.book.title}"/></td>
+		<td><c:out value="${borrowing.reader.firstName}"/> <c:out value="${borrowing.reader.lastName}"/></td>
+		<td><fmt:formatDate value="${borrowing.dateOfBorrow}" pattern="dd-MM-yyyy" /></td>
+		<td><c:out value="${borrowing.term}"/></td>
 		<td>
-			<c:if test="${not empty borrowings.dateOfReturn}">
-				<fmt:formatDate value="${borrowings.dateOfReturn}" pattern="dd-MM-yyyy" />)
+			<c:if test="${not empty borrowing.dateOfReturn}">
+				<fmt:formatDate value="${borrowing.dateOfReturn}" pattern="dd-MM-yyyy" />)
 			</c:if>
 		</td>
 		</tr>

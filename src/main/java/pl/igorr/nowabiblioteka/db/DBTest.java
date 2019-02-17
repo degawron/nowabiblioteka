@@ -3,7 +3,7 @@ package pl.igorr.nowabiblioteka.db;
 import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import pl.igorr.nowabiblioteka.domain.Readers;
+import pl.igorr.nowabiblioteka.domain.Reader;
 
 public class DBTest {
 	
@@ -11,13 +11,17 @@ public class DBTest {
 	
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(pl.igorr.nowabiblioteka.config.RootConfig.class);
 		
-		LibraryDAO readersDAO = (LibraryDAO) ctx.getBean("czytelnicyDAO");
+		LibraryDAO library = (LibraryDAO) ctx.getBean("libraryDAO");
 		
-		List<Readers> list = readersDAO.listReaders();
+		List<Reader> list = library.listReaders();
 		
+				
+		System.out.println(list.toString());
+		
+		System.out.println("Ostatni czytelnik: "+library.showLastReader().getFirstName()+" "+library.showLastReader().getLastName());
+
 		ctx.close();
 		
-		System.out.println(list.toString());
 	}
 	
 

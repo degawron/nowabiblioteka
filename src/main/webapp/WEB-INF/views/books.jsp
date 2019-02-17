@@ -17,7 +17,7 @@
 			<th style="width: 10%">Ilość</th>
 			<th style="width: 15%">Akcja</th>
 		</tr>
-		<c:forEach items="${booksList}" var="book">
+		<c:forEach items="${bookList}" var="book">
 			<tr>
 				<td><c:out value="${book.id}" /></td>
 				<td><c:out value="${book.title}" /></td>

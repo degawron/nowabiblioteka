@@ -78,13 +78,26 @@
 			<version>2.24.0</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Dodanie hammcrest (dal testów widoków -->
+		<!-- Dodanie hammcrest (dla testów widoków -->
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- dodanie walidacji dla danych wprowadzanych w formularzach -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<!-- dodanie walidacji dla hiberante'a -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.14.Final</version>
+		</dependency>
+
 
 	</dependencies>
 </project>
