@@ -1,25 +1,32 @@
 package pl.igorr.nowabiblioteka.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="ksiazki")
+@Table(name="books")
 public class Book {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_ksiazki")
+	@Column(name="book_id")
 	private int id;
 	
-	@Column(name="tytul")
+	@NotNull
+	@Column(name="title")
 	private String title;
 
-	@Column(name="autor")
+	@NotNull
+	@Column(name="author")
 	private String author;
 
-	@Column(name="rok")
+	@NotNull
+	@Column(name="year")
 	private int year;
 	
-	@Column(name="ilosc")
+	@NotNull
+	@Min(value=0)
+	@Column(name="quantity")
 	private int quantity;
 	
 	public Book(){

@@ -18,7 +18,7 @@ public class DBTest {
 				
 		System.out.println(list.toString());
 		
-		System.out.println("Ostatni czytelnik: "+library.showLastReader().getFirstName()+" "+library.showLastReader().getLastName());
+		System.out.println("Ostatni czytelnik: "+library.getLastReader().getFirstName()+" "+library.getLastReader().getLastName());
 
 		ctx.close();
 		

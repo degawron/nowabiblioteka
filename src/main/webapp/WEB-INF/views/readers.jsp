@@ -20,14 +20,14 @@
 			<th style="width: 15%">Akcja</th>
 		</tr>
 
-		<c:forEach items="${readerList}" var="reader">
+		<c:forEach items="${readersViewList}" var="reader">
 			<tr>
 				<td><c:out value="${reader.id}" /></td>
 				<td><c:out value="${reader.firstName}" /></td>
 				<td><c:out value="${reader.lastName}" /></td>
-				<td><c:out value="${reader.active}" /></td>
-				<td>todo</td>
-				<td>todo</td>
+				<td><c:out value="${reader.borrows}" /></td>
+				<td><c:out value="${reader.notReturned}" /></td>
+				<td><a href="<c:url value="/readers/edit/${reader.id}" />">Edytuj</a></td>
 			</tr>
 		</c:forEach>
 	</table>

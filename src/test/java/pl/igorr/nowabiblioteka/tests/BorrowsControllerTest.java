@@ -18,12 +18,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.igorr.nowabiblioteka.db.LibraryDAO;
-import pl.igorr.nowabiblioteka.domain.Borrowing;
-import pl.igorr.nowabiblioteka.web.BorrowingsController;
+import pl.igorr.nowabiblioteka.domain.Borrow;
+import pl.igorr.nowabiblioteka.web.BorrowsController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=pl.igorr.nowabiblioteka.config.RootConfig.class)
-public class BorrowingsControllerTest {
+public class BorrowsControllerTest {
 	
 	@Autowired
 	LibraryDAO library;
@@ -32,18 +32,18 @@ public class BorrowingsControllerTest {
 	@Transactional
 	@Rollback(true)
 	public void shouldShowBorrowings() throws Exception {
-		List<Borrowing> expectedBorrowings = library.listBorrowings(); //pobranie listy wypożyczeń z bazy
+		List<Borrow> expectedBorrowings = library.listBorrows(); //pobranie listy wypożyczeń z bazy
 
-		BorrowingsController controller = new BorrowingsController(library); //nowy kontroler dla MockMVC
+		BorrowsController controller = new BorrowsController(library); //nowy kontroler dla MockMVC
 
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/borrowings.jsp"))
 				.build(); //utworzenie mocka MVC
 		
-		mockMvc.perform(get("/borrowings")) // wywołanie widoku czytelników
-				.andExpect(view().name("borrowings")) //sprawdzenie czy został wyświetlony właściwy widok...
-				.andExpect(model().attributeExists("borrowingList")) // ... z własciwym modelem ...
-				.andExpect(model().attribute("borrowingList", hasItems(expectedBorrowings.toArray()))); // ... i elementami (hasItemsz hamcrest-a)
+		mockMvc.perform(get("/borrows")) // wywołanie widoku czytelników
+				.andExpect(view().name("borrows")) //sprawdzenie czy został wyświetlony właściwy widok...
+				.andExpect(model().attributeExists("borrowList")) // ... z własciwym modelem ...
+				.andExpect(model().attribute("borrowList", hasItems(expectedBorrowings.toArray()))); // ... i elementami (hasItemsz hamcrest-a)
 	}
 	
 

@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.test.context.ContextConfiguration;
@@ -45,6 +46,15 @@ public class BooksControllerTest {
 				.andExpect(view().name("books")) //sprawdzenie czy został wyświetlony właściwy widok...
 				.andExpect(model().attributeExists("bookList")) // ... z własciwym modelem ...
 				.andExpect(model().attribute("bookList", hasItems(expectedBooks.toArray()))); // ... i elementami (hasItemsz hamcrest-a)
+	}
+	
+	@Test
+	public void testAddBookPage() throws Exception {
+		BooksController controller = new BooksController(library);
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
+				.build();
+		mockMvc.perform(get("/books/add"))
+				.andExpect(view().name("bookForm")); // sprawdzamy czy wywołanie strony dodawania książki wyświetla właściwy widok
 	}
 
 }

@@ -3,36 +3,42 @@ package pl.igorr.nowabiblioteka.domain;
 import java.util.Date;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Immutable;
+
 @Entity
-@Table(name="wypozyczenia")
-public class Borrowing {
+@Immutable
+@Table(name="borrows_view")
+public class BorrowsView {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_wypozyczenia")
+	@Column(name="borrow_id")
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="ksiazka")
+	@JoinColumn(name="book")
 	private Book book;
 
 	@ManyToOne
-	@JoinColumn(name="czytelnik")
+	@JoinColumn(name="reader")
 	private Reader reader;
 	
-	@Column(name="data_wypozyczenia")
+	@Column(name="date_of_borrow")
 	private Date dateOfBorrow;
 	
-	@Column(name="termin")
+	@Column(name="term")
 	private int term;
 
-	@Column(name="data_zwrotu")
+	@Column(name="date_of_return")
 	private Date dateOfReturn;
 	
-	public Borrowing() {
+	@Column(name="borrow_time")
+	private int borrowTime;
+	
+	public BorrowsView() {
 		
 	}
 
-	public Borrowing(Book book, Reader reader, Date dateOfBorrow, int term, Date dateOfReturn) {
+	public BorrowsView(Book book, Reader reader, Date dateOfBorrow, int term, Date dateOfReturn) {
 		super();
 		this.book = book;
 		this.reader = reader;
@@ -89,12 +95,20 @@ public class Borrowing {
 		this.dateOfReturn = dateOfReturn;
 	}
 
+	public int getBorrowTime() {
+		return borrowTime;
+	}
+
+	public void setBorrowTime(int borrowTime) {
+		this.borrowTime = borrowTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Wypozyczenia [id=" + id + ", ksiazka=" + book
 				+ ", czytelnik=" + reader + ", wypozyczenie="
 				+ dateOfBorrow + ", termin=" + term + ", zwrot="
-				+ dateOfReturn + "]";
+				+ dateOfReturn + ", czas od wypożyczenia=" + borrowTime + "]";
 	}
 
 	

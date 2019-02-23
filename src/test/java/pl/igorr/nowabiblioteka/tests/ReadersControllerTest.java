@@ -55,7 +55,7 @@ public class ReadersControllerTest {
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
 				.build();
 		mockMvc.perform(get("/readers/add"))
-				.andExpect(view().name("addReaderForm")); // sprawdzamy czy wywołanie strony
+				.andExpect(view().name("readerForm")); // sprawdzamy czy wywołanie strony
 																					// dodawania czytelnika wyświetla
 																					// właściwy widok
 	}
@@ -75,7 +75,7 @@ public class ReadersControllerTest {
 				.param("lastName", "Gęśłą Jaźń"))
 				.andExpect(redirectedUrl("/readers"));
 		
-		Reader reader = library.showLastReader();
+		Reader reader = library.getLastReader();
 		String lastReadersName = reader.getFirstName()+reader.getLastName(); //pobranie ostatnio dodanego czytelnika
 		System.out.println(lastReadersName);
 		assertEquals("ZażółćGęśłą Jaźń", lastReadersName); //sprawdzenie, czy ostatnio dodany czytelnik jest zgodny z wartościami z zapytania

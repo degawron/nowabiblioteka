@@ -30,7 +30,7 @@ public class PersistenceConfig {
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/biblioteka?useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Warsaw&connectionAttributes=program_name:nowa-biblioteka");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/library?useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Warsaw&connectionAttributes=program_name:nowa-biblioteka");
 		dataSource.setUsername("java");
 		dataSource.setPassword("java");
 
@@ -49,7 +49,7 @@ public class PersistenceConfig {
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.show_sql", "true");
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 
 		return hibernateProperties;
 	}

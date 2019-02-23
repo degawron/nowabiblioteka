@@ -1,40 +1,43 @@
 package pl.igorr.nowabiblioteka.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="readers")
-public class Reader {
+@Table(name="readers_view")
+public class ReadersView {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="reader_id")
 	private int id;
 	
-	@NotEmpty
 	@Column(name="first_name")
 	String firstName;
 
-	@NotEmpty
 	@Column(name="last_name")
 	private String lastName;
 	
 	@Column(name="active")
 	private int active;
+	
+	@Column(name="borrows")
+	private long borrows;
+	
+	@Column(name="not_returned")
+	private long notReturned;
+	
 
-
-	public Reader() {
+	public ReadersView() {
 
 	}
 
-	public Reader(String firstName, String lastName) {
+	public ReadersView(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.active = 1;
 	}
 	
-	public Reader(String firstName, String lastName, int active) {
+	public ReadersView(String firstName, String lastName, int active) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -73,8 +76,24 @@ public class Reader {
 		this.active = active;
 	}
 
+	public long getBorrows() {
+		return borrows;
+	}
+
+	public void setBorrows(long borrows) {
+		this.borrows = borrows;
+	}
+
+	public long getNotReturned() {
+		return notReturned;
+	}
+
+	public void setNotReturned(long notReturned) {
+		this.notReturned = notReturned;
+	}
+
 	@Override
 	public String toString() {
-		return "Czytelnicy [id=" + id + ", imie=" + firstName + ", nazwisko=" + lastName + ", aktywny=" + active + "]";
+		return "Czytelnicy [id=" + id + ", imie=" + firstName + ", nazwisko=" + lastName + ", aktywny=" + active + ", wypożyczenia=" + borrows + ", niezrócone=" + notReturned + "]";
 	}
 }

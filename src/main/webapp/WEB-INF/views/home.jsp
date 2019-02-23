@@ -10,6 +10,6 @@
 		<h1>Witamy w Nowej Bibliotece</h1>
 		<a href="<c:url value="/readers" />">Czytelnicy</a> |
 		<a href="<c:url value="/books" />">Książki</a> |
-		<a href="<c:url value="/borrowings" />">Wypożyczenia</a>
+		<a href="<c:url value="/borrows" />">Wypożyczenia</a>
 	</body>
 </html>

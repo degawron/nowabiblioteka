@@ -8,9 +8,10 @@
 </head>
 <body>
 	<h1>Lista Książek</h1>
+	<a href="<c:url value="/books/add" />">Dodaj książkę</a>
 	<table>
 		<tr>
-			<th style="width: 10%">Lp.</th>
+			<th style="width: 10%">ID</th>
 			<th style="width: 30%">Tytuł</th>
 			<th style="width: 25%">Autor</th>
 			<th style="width: 10%">Rok</th>
@@ -24,7 +25,7 @@
 				<td><c:out value="${book.author}" /></td>
 				<td><c:out value="${book.year}" /></td>
 				<td><c:out value="${book.quantity}" /></td>
-				<td>todo</td>
+				<td><a href="<c:url value="/books/edit/${book.id}" />">Edytuj</a></td>
 			</tr>
 		</c:forEach>
 	</table>
