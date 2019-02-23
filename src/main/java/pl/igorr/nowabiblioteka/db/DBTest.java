@@ -11,7 +11,7 @@ public class DBTest {
 	
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(pl.igorr.nowabiblioteka.config.RootConfig.class);
 		
-		LibraryDAO library = (LibraryDAO) ctx.getBean("libraryDAO");
+		LibraryDAOOld library = (LibraryDAOOld) ctx.getBean("libraryDAO");
 		
 		List<Reader> list = library.listReaders();
 		

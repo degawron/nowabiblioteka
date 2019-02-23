@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.igorr.nowabiblioteka.db.LibraryDAO;
+import pl.igorr.nowabiblioteka.api.BookService;
 import pl.igorr.nowabiblioteka.domain.Book;
 import pl.igorr.nowabiblioteka.web.BooksController;
 
@@ -28,15 +28,15 @@ import pl.igorr.nowabiblioteka.web.BooksController;
 public class BooksControllerTest {
 	
 	@Autowired
-	LibraryDAO library;
+	BookService bookService;
 
 	@Test
 	@Transactional
 	@Rollback(true)
 	public void shouldShowBooks() throws Exception {
-		List<Book> expectedBooks = library.listBooks(); //pobranie listy książek z bazy
+		List<Book> expectedBooks = bookService.listBooks(); //pobranie listy książek z bazy
 
-		BooksController controller = new BooksController(library); //nowy kontroler dla MockMVC
+		BooksController controller = new BooksController(bookService); //nowy kontroler dla MockMVC
 
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/books.jsp"))
@@ -50,7 +50,7 @@ public class BooksControllerTest {
 	
 	@Test
 	public void testAddBookPage() throws Exception {
-		BooksController controller = new BooksController(library);
+		BooksController controller = new BooksController(bookService);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
 				.build();
 		mockMvc.perform(get("/books/add"))

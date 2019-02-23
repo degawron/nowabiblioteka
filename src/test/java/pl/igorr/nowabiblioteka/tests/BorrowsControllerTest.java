@@ -17,8 +17,10 @@ import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.igorr.nowabiblioteka.db.LibraryDAO;
+import pl.igorr.nowabiblioteka.api.BorrowService;
+import pl.igorr.nowabiblioteka.db.LibraryDAOOld;
 import pl.igorr.nowabiblioteka.domain.Borrow;
+import pl.igorr.nowabiblioteka.domain.BorrowsView;
 import pl.igorr.nowabiblioteka.web.BorrowsController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,15 +28,15 @@ import pl.igorr.nowabiblioteka.web.BorrowsController;
 public class BorrowsControllerTest {
 	
 	@Autowired
-	LibraryDAO library;
+	BorrowService borrowService;
 
 	@Test
 	@Transactional
 	@Rollback(true)
 	public void shouldShowBorrowings() throws Exception {
-		List<Borrow> expectedBorrowings = library.listBorrows(); //pobranie listy wypożyczeń z bazy
+		List<BorrowsView> expectedBorrowings = borrowService.listBorrows(); //pobranie listy wypożyczeń z bazy
 
-		BorrowsController controller = new BorrowsController(library); //nowy kontroler dla MockMVC
+		BorrowsController controller = new BorrowsController(borrowService, null, null); //nowy kontroler dla MockMVC
 
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/borrowings.jsp"))

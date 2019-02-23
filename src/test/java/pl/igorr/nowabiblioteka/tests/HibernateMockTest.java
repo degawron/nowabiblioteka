@@ -5,12 +5,12 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import pl.igorr.nowabiblioteka.db.LibraryDAO;
+import pl.igorr.nowabiblioteka.db.LibraryDAOOld;
 
 public class HibernateMockTest {
 
 	@Mock
-	LibraryDAO mockLibrary;
+	LibraryDAOOld mockLibrary;
 	
 	@Before
 	public void initMocks() {
