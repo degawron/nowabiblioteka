@@ -18,8 +18,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.igorr.nowabiblioteka.api.BorrowService;
-import pl.igorr.nowabiblioteka.db.LibraryDAOOld;
-import pl.igorr.nowabiblioteka.domain.Borrow;
 import pl.igorr.nowabiblioteka.domain.BorrowsView;
 import pl.igorr.nowabiblioteka.web.BorrowsController;
 

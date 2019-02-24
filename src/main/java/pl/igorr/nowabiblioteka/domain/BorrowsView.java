@@ -15,11 +15,11 @@ public class BorrowsView {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="book")
+	@JoinColumn(name="book", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT)) //wyłączenie tworzenia FK przez validator hibernate
 	private Book book;
 
 	@ManyToOne
-	@JoinColumn(name="reader")
+	@JoinColumn(name="reader", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT)) //wyłączenie tworzenia FK przez validator hibernate
 	private Reader reader;
 	
 	@Column(name="date_of_borrow")
