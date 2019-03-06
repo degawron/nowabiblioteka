@@ -2,7 +2,7 @@ package pl.igorr.nowabiblioteka.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="books")
@@ -12,20 +12,18 @@ public class Book {
 	@Column(name="book_id")
 	private int id;
 	
-	@NotNull
+	@NotEmpty(message= "{book.title.notempty}")
 	@Column(name="title")
 	private String title;
 
-	@NotNull
+	@NotEmpty(message= "{book.author.notempty}")
 	@Column(name="author")
 	private String author;
 
-	@NotNull
 	@Column(name="year")
 	private int year;
 	
-	@NotNull
-	@Min(value=0)
+	@Min(value=0, message= "{book.quantity.negative}")
 	@Column(name="quantity")
 	private int quantity;
 	

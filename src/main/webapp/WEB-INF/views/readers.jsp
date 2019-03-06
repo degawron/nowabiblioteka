@@ -8,8 +8,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />" >
 </head>
 <body>
-	<h1>Lista Czytelników</h1>
-	<a href="<c:url value="/readers/add" />">Dodaj czytelnika</a>
+	<%@ include file="menu.jsp"%>
+	<a class="add" href="<c:url value="/readers/add" />">Dodaj czytelnika</a>
 	<table>
 		<tr>
 			<th style="width: 10%">ID</th>

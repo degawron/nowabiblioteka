@@ -7,7 +7,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = { "pl.igorr.nowabiblioteka.db" , "pl.igorr.nowabiblioteka.api" , "pl.igorr.nowabiblioteka.implementations" }, excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class) })
+@ComponentScan(basePackages = { "pl.igorr.nowabiblioteka" }, excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class) })
 public class RootConfig {
 
 }

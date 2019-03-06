@@ -10,7 +10,9 @@
 	href="<c:url value="/resources/style.css" />">
 </head>
 <body>
-	<h1>
+	<%@ include file="menu.jsp"%>
+
+	<h2>
 		<c:choose>
 			<c:when test="${requestScope['javax.servlet.forward.servlet_path'] == '/books/add'}">
 			Nowa Książka
@@ -19,20 +21,24 @@
 			Edycja Książki
 			</c:otherwise>
 		</c:choose>
-	</h1>
+	</h2>
 	<sf:form method="POST" modelAttribute="book">
 		<sf:hidden path="id" />
-		Tytuł:<br />
+		<sf:label path="title">Tytuł:</sf:label><br />
 		<sf:input path="title" />
+		<sf:errors path="title" cssClass="error" />
 		<br />
-		Autor:<br />
+		<sf:label path="author">Autor:</sf:label><br />
 		<sf:input path="author" />
+		<sf:errors path="author" cssClass="error" />
 		<br />
-		Rok:<br />
-		<sf:input path="year" />
+		<sf:label path="year">Rok:</sf:label><br />
+		<sf:input path="year" type="number" />
+		<sf:errors path="year" cssClass="error" />
 		<br />
-		Ilość:<br />
-		<sf:input path="quantity" />
+		<sf:label path="quantity">Ilość:</sf:label><br />
+		<sf:input path="quantity" type="number" />
+		<sf:errors path="quantity" cssClass="error" />
 		<br />
 		<input type="submit" value="Zapisz" />
 	</sf:form>

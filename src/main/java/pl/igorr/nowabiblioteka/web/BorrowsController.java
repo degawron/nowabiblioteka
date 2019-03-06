@@ -1,5 +1,7 @@
 package pl.igorr.nowabiblioteka.web;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,10 +37,10 @@ public class BorrowsController {
 	
 	@RequestMapping (value="/new", method = RequestMethod.GET) //obsługa żadania GET w poniższej metodzie
 	public String newBorrowForm(Model model) {
-		
 		model.addAttribute(new Borrow()); //dodanie nowego wypożyczenia do modelu
 		model.addAttribute(bookService.listAvailableBooks()); //wstawienie listy dostępnych książek do modelu
 		model.addAttribute(readerService.listActiveReaders()); //wstawienie listy aktywnych czytelników do modelu
+		model.addAttribute("date", LocalDate.now().toString()); //przekazane aktualnej daty do wstawienia do formatki daty wypożyczenia
 		return "borrowForm"; //zwrócenie nazwy widoku
 	}
 	
@@ -52,6 +54,7 @@ public class BorrowsController {
 	@RequestMapping (value="/return/{borrowId}", method = RequestMethod.GET) //obsługa żadania GET 
 	public String returnBookForm(@PathVariable("borrowId") int borrowId, Model model) {
 		model.addAttribute(borrowService.getBorrow(borrowId)); //dodanie do modelu wypozyczenia o ID przekazanym w ścieżce
+		model.addAttribute("date", LocalDate.now().toString()); //przekazane aktualnej daty do wstawienia do formatki daty wypożyczenia
 		return "returnBookForm";
 	}
 	

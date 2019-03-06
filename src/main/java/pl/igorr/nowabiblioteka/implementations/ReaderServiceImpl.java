@@ -30,7 +30,7 @@ public class ReaderServiceImpl implements ReaderService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReadersView> listActiveReaders() {
-		List<ReadersView> list = (List<ReadersView>) libraryDAO.list("from Reader where active=1");
+		List<ReadersView> list = (List<ReadersView>) libraryDAO.list("from Reader where enabled=1");
 		return list;
 	}
 	

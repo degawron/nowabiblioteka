@@ -16,8 +16,8 @@ public class ReadersView {
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="active")
-	private int active;
+	@Column(name="enabled")
+	private int enabled;
 	
 	@Column(name="borrows")
 	private long borrows;
@@ -34,14 +34,14 @@ public class ReadersView {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.active = 1;
+		this.enabled = 1;
 	}
 	
-	public ReadersView(String firstName, String lastName, int active) {
+	public ReadersView(String firstName, String lastName, int enabled) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.active = active;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -68,12 +68,12 @@ public class ReadersView {
 		this.lastName = lastName;
 	}
 
-	public int getActive() {
-		return active;
+	public int getEnabled() {
+		return enabled;
 	}
 
-	public void setActive(int active) {
-		this.active = active;
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 
 	public long getBorrows() {
@@ -94,6 +94,6 @@ public class ReadersView {
 
 	@Override
 	public String toString() {
-		return "Czytelnicy [id=" + id + ", imie=" + firstName + ", nazwisko=" + lastName + ", aktywny=" + active + ", wypożyczenia=" + borrows + ", niezrócone=" + notReturned + "]";
+		return "Czytelnicy [id=" + id + ", imie=" + firstName + ", nazwisko=" + lastName + ", aktywny=" + enabled + ", wypożyczenia=" + borrows + ", niezrócone=" + notReturned + "]";
 	}
 }

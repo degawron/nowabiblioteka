@@ -11,16 +11,16 @@ public class NowaBibliotekaWebAppInitializer extends AbstractAnnotationConfigDis
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() { 
-		return new Class<?>[] { RootConfig.class }; //przekazanie klasy głownej konfiguracyji
+		return new Class<?>[] { RootConfig.class }; //przekazanie klasy głównej konfiguracji
 	}
 
 	@Override
-	protected Class<?>[] getServletConfigClasses() { //przekazanie klasy konfisyracji serwletu dystrybutora
+	protected Class<?>[] getServletConfigClasses() { //przekazanie klasy konfiguracji serwletu dystrybutora
 		return new Class<?>[] { WebConfig.class };
 	}
 
 	@Override
-	protected String[] getServletMappings() { //odzworoweanie serwletu dystryburoa na /
+	protected String[] getServletMappings() { //odwzorowanie serwletu dystrybutora na /
 		return new String[] { "/" };
 	}
 

@@ -43,7 +43,7 @@ public class ReadersController {
 	
 	@RequestMapping (value="/add", method = RequestMethod.POST) //obsługa żadania POST w poniższej metodzie
 	public String addReader(@Valid Reader reader, Errors errors) {
-		reader.setActive(1); // ustawienie czytelnika jako aktywnego
+		reader.setEnabled(1); // ustawienie czytelnika jako aktywnego
 		if (errors.hasErrors()) return "readerForm"; //Walidacja przekazywanych pól -> w razie błędu powrót do formularza
 		readerService.addReader(reader); //dodanie nowego czytelnika do bazy
 		return "redirect:/readers"; //zwrócenie przekierowania do widoku (zamiast widoku bezpośrednio)

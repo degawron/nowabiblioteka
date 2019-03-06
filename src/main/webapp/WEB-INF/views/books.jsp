@@ -7,8 +7,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />" >
 </head>
 <body>
-	<h1>Lista Książek</h1>
-	<a href="<c:url value="/books/add" />">Dodaj książkę</a>
+	<%@ include file="menu.jsp"%>
+	<a class="add" href="<c:url value="/books/add" />">Dodaj książkę</a>
 	<table>
 		<tr>
 			<th style="width: 10%">ID</th>

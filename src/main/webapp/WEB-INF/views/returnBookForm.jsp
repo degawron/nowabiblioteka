@@ -10,12 +10,14 @@
 	href="<c:url value="/resources/style.css" />">
 </head>
 <body>
-	<h1>Zwrot Ksiązki</h1>
+	<%@ include file="menu.jsp"%>
+
+	<h2>Zwrot Ksiązki</h2>
 	<sf:form method="POST" modelAttribute="borrow">
 		<sf:hidden path="id"/>
 		<sf:hidden path="book.id"/>
 		Data zwrotu:<br />
-		<sf:input type="date" path="dateOfReturn"/>		
+		<sf:input type="date" path="dateOfReturn" value="${date}" />		
 		<br />
 		<input type="submit" value="Zapisz" />
 	</sf:form>

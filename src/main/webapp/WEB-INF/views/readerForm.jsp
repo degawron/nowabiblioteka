@@ -10,7 +10,9 @@
 	href="<c:url value="/resources/style.css" />">
 </head>
 <body>
-	<h1>
+	<%@ include file="menu.jsp"%>
+
+	<h2>
 		<c:choose>
 			<c:when test="${requestScope['javax.servlet.forward.servlet_path'] == '/readers/add'}">
 			Nowy Czytelnik
@@ -19,16 +21,18 @@
 			Edycja Czytelnika
 			</c:otherwise>
 		</c:choose>
-	</h1>
+	</h2>
 	<sf:form method="POST" modelAttribute="reader">
 		<sf:hidden path="id" />
-		Imię:<br />
-		<sf:input path="firstName" />
+		<sf:label path="firstName">Imię</sf:label><br />
+		<sf:input path="firstName" cssErrorClass="error" />
+		<sf:errors path="firstName" cssClass="error" />
 		<br />
-		Nazwisko:<br />
-		<sf:input path="lastName" />
+		<sf:label path="lastName">Nazwisko:</sf:label><br />
+		<sf:input path="lastName" cssErrorClass="error" />
+		<sf:errors path="lastName" cssClass="error" />
 		<br />
-		<sf:hidden path="active" />
+		<sf:hidden path="enabled" />
 		<input type="submit" value="Zapisz" />
 	</sf:form>
 </body>

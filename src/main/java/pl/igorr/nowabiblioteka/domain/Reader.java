@@ -11,16 +11,16 @@ public class Reader {
 	@Column(name="reader_id")
 	private int id;
 	
-	@NotEmpty
+	@NotEmpty(message= "{reader.firstName.notempty}")
 	@Column(name="first_name")
 	String firstName;
 
-	@NotEmpty
+	@NotEmpty(message= "{reader.lastName.notempty}")
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="active")
-	private int active;
+	@Column(name="enabled")
+	private int enabled;
 
 
 	public Reader() {
@@ -31,14 +31,14 @@ public class Reader {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.active = 1;
+		this.enabled = 1;
 	}
 	
-	public Reader(String firstName, String lastName, int active) {
+	public Reader(String firstName, String lastName, int enabled) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.active = active;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -65,16 +65,16 @@ public class Reader {
 		this.lastName = lastName;
 	}
 
-	public int getActive() {
-		return active;
+	public int getEnabled() {
+		return enabled;
 	}
 
-	public void setActive(int active) {
-		this.active = active;
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override
 	public String toString() {
-		return "Czytelnicy [id=" + id + ", imie=" + firstName + ", nazwisko=" + lastName + ", aktywny=" + active + "]";
+		return "Czytelnik [id=" + id + ", imie=" + firstName + ", nazwisko=" + lastName + ", aktywny=" + enabled + "]";
 	}
 }

@@ -10,7 +10,9 @@
 	href="<c:url value="/resources/style.css" />">
 </head>
 <body>
-	<h1>Nowe Wypożyczenie</h1>
+	<%@ include file="menu.jsp"%>
+
+	<h2>Nowe Wypożyczenie</h2>
 	<sf:form method="POST" modelAttribute="borrow">
 		Książka <br />
 		<sf:select path="book.id" id="bookOptions">
@@ -31,7 +33,7 @@
 		</sf:select>
 		<br />
 		Data wypożyczenia:<br />
-		<sf:input type="date" path="dateOfBorrow"/>		
+		<sf:input type="date" path="dateOfBorrow" value="${date}" />		
 		<br />
 		Termin zwrotu:<br />
 		<sf:radiobutton path="term" value="7" />1 tydzień<br />

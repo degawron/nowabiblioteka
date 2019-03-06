@@ -10,8 +10,8 @@
 	href="<c:url value="/resources/style.css" />">
 </head>
 <body>
-	<h1>Lista Wypożyczeń</h1>
-	<a href="<c:url value="/borrows/new" />">Nowe wypożyczenie</a>
+	<%@ include file="menu.jsp"%>
+	<a class="add" href="<c:url value="/borrows/new" />">Nowe wypożyczenie</a>
 	<table>
 		<tr>
 			<th style="width: 5%">ID</th>
@@ -32,7 +32,14 @@
 						value="${borrow.reader.lastName}" /></td>
 				<td><fmt:formatDate value="${borrow.dateOfBorrow}"
 						pattern="dd-MM-yyyy" /></td>
-				<td><c:out value="${borrow.borrowTime}/${borrow.term}" /></td>
+				<c:choose>
+						<c:when test="${borrow.borrowTime>borrow.term}">
+							<td style="background-color: red"><c:out value="${borrow.borrowTime}/${borrow.term}" /></td>
+						</c:when>
+						<c:otherwise>
+							<td><c:out value="${borrow.borrowTime}/${borrow.term}" /></td>
+						</c:otherwise>
+				</c:choose>
 				<td><c:choose>
 						<c:when test="${not empty borrow.dateOfReturn}">
 							<fmt:formatDate value="${borrow.dateOfReturn}"
