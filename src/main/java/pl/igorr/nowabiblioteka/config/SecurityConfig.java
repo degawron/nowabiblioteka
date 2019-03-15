@@ -21,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // konfigurac
 		http
 			.authorizeRequests()//włączenie autoryzacji zapytań
 			.regexMatchers("/","/start").permitAll() //wykluczenie autoryzacji dla strony domowej
+			.regexMatchers("/resources/style.css").permitAll() //wykluczenie autoryzacji dla arkusza stylów
 			.anyRequest().authenticated() //pozostałe adresy wymagają autoryzacji
 			.and().formLogin() //włączenie springowej strony logowania
 			.and().logout().logoutSuccessUrl("/") //po wylogowaniu przekierowanie na stronę startową

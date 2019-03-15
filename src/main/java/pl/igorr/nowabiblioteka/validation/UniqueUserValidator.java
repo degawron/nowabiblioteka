@@ -27,10 +27,10 @@ public class UniqueUserValidator implements ConstraintValidator<UniqueUserConstr
 		try {
 		userManager.loadUserByUsername(username); //próba pobrania użytkownika o podanej nazwie (loginie)
 		}
-		catch (UsernameNotFoundException e){ //w razie niepoodwodzenia wynik walidacji negatywny
+		catch (UsernameNotFoundException e){ //w razie niepoodwodzenia wynik walidacji pozytywny (użytkownik nie istnieje)
 			return true;			
 		}
-		return false;
+		return false; //jeśli użytkownika udało się pobrać wynik walidacji negatywny
 	}
 
 }

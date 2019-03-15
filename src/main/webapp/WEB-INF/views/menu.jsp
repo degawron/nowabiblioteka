@@ -13,6 +13,9 @@
 		}
 	</script>
 	<div id="sidenav" class="sidenav">
+		<sec:authorize access="isAuthenticated()">
+		<span class="user">Zalogowany:&nbsp;<sec:authentication property="name"/></span>
+		</sec:authorize>
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<a href="<c:url value="/start" />">Start</a>
 		<br/>

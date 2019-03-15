@@ -12,6 +12,7 @@
 <body>
 	<%@ include file="menu.jsp"%>
 
+	<div class="dataform">
 	<h2>Nowe Wypożyczenie</h2>
 	<sf:form method="POST" modelAttribute="borrow">
 		Książka <br />
@@ -39,7 +40,9 @@
 		<sf:radiobutton path="term" value="7" />1 tydzień<br />
 		<sf:radiobutton path="term" value="14" />2 tygodnie<br />
 		<sf:radiobutton path="term" value="30" />1 miesiąc<br />
+		<br />
 		<input type="submit" value="Zapisz" />
 	</sf:form>
+	</div>
 </body>
 </html>

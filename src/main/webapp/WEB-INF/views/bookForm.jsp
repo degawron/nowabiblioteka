@@ -12,6 +12,7 @@
 <body>
 	<%@ include file="menu.jsp"%>
 
+	<div class="dataform">
 	<h2>
 		<c:choose>
 			<c:when test="${requestScope['javax.servlet.forward.servlet_path'] == '/books/add'}">
@@ -24,12 +25,10 @@
 	</h2>
 	<sf:form method="POST" modelAttribute="book">
 		<sf:hidden path="id" />
-		<sf:label path="title">Tytuł:</sf:label><br />
-		<sf:input path="title" />
+		<sf:input path="title" placeholder="Tytuł" />
 		<sf:errors path="title" cssClass="error" />
 		<br />
-		<sf:label path="author">Autor:</sf:label><br />
-		<sf:input path="author" />
+		<sf:input path="author" placeholder="Autor" />
 		<sf:errors path="author" cssClass="error" />
 		<br />
 		<sf:label path="year">Rok:</sf:label><br />
@@ -39,8 +38,9 @@
 		<sf:label path="quantity">Ilość:</sf:label><br />
 		<sf:input path="quantity" type="number" />
 		<sf:errors path="quantity" cssClass="error" />
-		<br />
+		<br /><br />
 		<input type="submit" value="Zapisz" />
 	</sf:form>
+	</div>
 </body>
 </html>

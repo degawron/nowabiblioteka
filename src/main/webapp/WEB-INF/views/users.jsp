@@ -25,7 +25,7 @@
 				<td><c:out value="${user.password}" /></td>
 				<td><c:out value="${user.enabled}" /></td>
 				<td><c:out value="${user.authorities}" /></td>
-				<td><a href="<c:url value="/users/edit/${reader.username}" />">Edytuj</a></td>
+				<td><a href="<c:url value="/users/edit/${user.username}" />">Edytuj</a></td>
 			</tr>
 		</c:forEach>
 	</table>

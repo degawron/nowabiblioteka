@@ -3,15 +3,12 @@ package pl.igorr.nowabiblioteka.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-import pl.igorr.nowabiblioteka.validation.UniqueUserConstraint;
-
 @Entity
 @Table(name="users_view")
 public class UsersView {
 
 	@Id
 	@Column(name="username", unique=true)
-	@UniqueUserConstraint //adnotacja o dodatkowo utworzonej walidacji dla formularzy
 	private String username;
 	
 	@Column(name="password")
@@ -26,6 +23,18 @@ public class UsersView {
 
 	public String getUsername() {
 		return username;
+	}
+	
+	public UsersView() {
+		super();
+	}
+
+	public UsersView(String username, String password, int enabled, String authorities) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.authorities = authorities;
 	}
 
 	public void setUsername(String username) {

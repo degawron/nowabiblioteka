@@ -33,7 +33,7 @@
 				<td><fmt:formatDate value="${borrow.dateOfBorrow}"
 						pattern="dd-MM-yyyy" /></td>
 				<c:choose>
-						<c:when test="${borrow.borrowTime>borrow.term}">
+						<c:when test="${borrow.borrowTime>borrow.term && empty borrow.dateOfReturn}">
 							<td style="background-color: red"><c:out value="${borrow.borrowTime}/${borrow.term}" /></td>
 						</c:when>
 						<c:otherwise>

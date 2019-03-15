@@ -1,17 +1,20 @@
 package pl.igorr.nowabiblioteka.web;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.igorr.nowabiblioteka.api.UserService;
-import pl.igorr.nowabiblioteka.domain.UsersView;
+import pl.igorr.nowabiblioteka.domain.UserDTO;
+import pl.igorr.nowabiblioteka.domain.UserDTO.AddUser;
+import pl.igorr.nowabiblioteka.domain.UserDTO.EditUser;
 
 @Controller // Deklaracja klasy jako kontrolera
 @RequestMapping(value = "/users") // mapowanie dla podanej ścieżki
@@ -28,25 +31,36 @@ public class UsersController {
 		this.userService = readerService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET) // obsługa żądania GET w poniższej metodzie
+	@GetMapping // obsługa żądania GET w poniższej metodzie
 	public String showUsers(Model model) {
 		model.addAttribute(userService.listUsers()); // wstawienie listy czytelników jako modelu
-		return "users"; // zwrócenie nazwy widoku
+		return "users"; // zwrócenie nazwy widoku użytkowników
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET) // obsługa żądania GET w poniższej metodzie
+	@GetMapping("/add") // obsługa żądania GET w poniższej metodzie
 	public String addUserForm(Model model) {
-		model.addAttribute(new UsersView()); // dodanie nowego użytkownika(+uprawnienia) jako modelu dla formularza
+		model.addAttribute(new UserDTO()); // dodanie nowego użytkownika przejściowego jako modelu dla formularza
+		return "userForm"; //zwrócenie widoku - formularz użytkownika
+	}
+
+	@PostMapping("/add") // Obsługa formularza wysłanego metodą POST
+	public String addUser(@Validated({AddUser.class}) UserDTO user, Errors errors) {
+		if (errors.hasErrors()) return "userForm"; //powrót do formularza w razie błędu
+		userService.createUser(user); // utworzenie nowego użytkownika
+		return "redirect:/users"; //przekierowanie na widok użytkowników (przekierowanie w celu uniknięcia przypadkowego odświeżenia)
+	}
+
+	@GetMapping("/edit/{username}") //obsługa żądania GET w poniższej metodzie
+	public String editUserForm(@PathVariable("username") String username, Model model) {
+		model.addAttribute(userService.getUser(username)); //dodanie do modelu danych użytkownika pobranych z bazy po nazwie
 		return "userForm";
 	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST) // Obsługa formularza wysłanego metodą POST
-	public String addUser(@Valid UsersView user, Errors errors) {
-		if (errors.hasErrors()) return "userForm";
-		userService.createUserJDBC(user); // utworzenie nowego użytkownika
-		return "redirect:/users";
-	}
-
-	//TODO obsługa edycji i usuwania użytkowników
 	
+	@PostMapping("/edit/{username}") //obsługa żadania POST z formularza (wartość zmiennej nie jest używana)
+	public String editUser(@PathVariable("username") String username, @Validated({EditUser.class}) UserDTO user, Errors errors) {
+		if (errors.hasErrors()) return "userForm"; //powrót do formularza w razie błędu
+		userService.updateUser(user); //aktualizacja użytkownika w bazie
+		return "redirect:/users"; //przekierowanie na widok użytkowników (przekierowanie w celu uniknięcia przypadkowego odświeżenia)
+	}
+		
 }

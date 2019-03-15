@@ -12,6 +12,7 @@
 <body>
 	<%@ include file="menu.jsp"%>
 
+	<div class="dataform">
 	<h2>Zwrot Ksiązki</h2>
 	<sf:form method="POST" modelAttribute="borrow">
 		<sf:hidden path="id"/>
@@ -21,5 +22,6 @@
 		<br />
 		<input type="submit" value="Zapisz" />
 	</sf:form>
+	</div>
 </body>
 </html>
