@@ -25,14 +25,14 @@
 	</h2>
 	<sf:form method="POST" modelAttribute="userDTO">
 		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/users/add'}">
-			<sf:input path="username" placeholder="Login" cssErrorClass="error" />
+			<sf:input path="username" placeholder="Login" cssErrorClass="error" /><br />
 			<sf:errors path="username" cssClass="error" />
 			<br />
 		</c:if>
-		<sf:password path="password" placeholder="Hasło" cssErrorClass="error" />
+		<sf:password path="password" placeholder="Hasło" cssErrorClass="error" /><br />
 		<sf:errors path="password" cssClass="error" />
 		<br />
-		<sf:password path="confirmPassword" placeholder="Potwierdź hasło" cssErrorClass="error" />
+		<sf:password path="confirmPassword" placeholder="Potwierdź hasło" cssErrorClass="error" /><br />
 		<sf:errors path="confirmPassword" cssClass="error" />
 		<br />
 		<sf:checkbox path="authorities" value="ROLE_ADMIN" />Administrator<br />

@@ -1,6 +1,8 @@
 package pl.igorr.nowabiblioteka.web;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.igorr.nowabiblioteka.api.UserService;
 import pl.igorr.nowabiblioteka.domain.UserDTO;
 import pl.igorr.nowabiblioteka.domain.UserDTO.AddUser;
-import pl.igorr.nowabiblioteka.domain.UserDTO.EditUser;
 
 @Controller // Deklaracja klasy jako kontrolera
 @RequestMapping(value = "/users") // mapowanie dla podanej ścieżki
@@ -44,7 +45,7 @@ public class UsersController {
 	}
 
 	@PostMapping("/add") // Obsługa formularza wysłanego metodą POST
-	public String addUser(@Validated({AddUser.class}) UserDTO user, Errors errors) {
+	public String addUser(@Validated({AddUser.class}) UserDTO user, Errors errors) { //dodatkowa walidacja 
 		if (errors.hasErrors()) return "userForm"; //powrót do formularza w razie błędu
 		userService.createUser(user); // utworzenie nowego użytkownika
 		return "redirect:/users"; //przekierowanie na widok użytkowników (przekierowanie w celu uniknięcia przypadkowego odświeżenia)
@@ -57,7 +58,7 @@ public class UsersController {
 	}
 	
 	@PostMapping("/edit/{username}") //obsługa żadania POST z formularza (wartość zmiennej nie jest używana)
-	public String editUser(@PathVariable("username") String username, @Validated({EditUser.class}) UserDTO user, Errors errors) {
+	public String editUser(@PathVariable("username") String username, @Valid UserDTO user, Errors errors) {
 		if (errors.hasErrors()) return "userForm"; //powrót do formularza w razie błędu
 		userService.updateUser(user); //aktualizacja użytkownika w bazie
 		return "redirect:/users"; //przekierowanie na widok użytkowników (przekierowanie w celu uniknięcia przypadkowego odświeżenia)

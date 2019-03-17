@@ -1,7 +1,9 @@
 package pl.igorr.nowabiblioteka.tests;
 
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
@@ -35,7 +37,7 @@ public class ReadersControllerTest {
 	@Test
 	public void shouldShowReaders() throws Exception {
 
-		when(mockReaderService.listReaders()).thenReturn(fakeReaderList(10)); //zamockowanie listy zwracanej przez listReaders
+		when(mockReaderService.listReaders()).thenReturn(fakeReadersList(10)); //zamockowanie listy zwracanej przez listReaders
 		List<ReadersView> expectedReaders = mockReaderService.listReaders(); // pobranie listy czytelników z bazy
 		ReadersController controller = new ReadersController(mockReaderService); // nowy kontroler dla MockMVC
 
@@ -66,8 +68,6 @@ public class ReadersControllerTest {
 	@Test
 	public void shouldAddReader() throws Exception {
 		Reader reader = new Reader("Zażółć", "Gęśląjazń"); // tworzymy testowego czytelnika
-		when(mockReaderService.addReader(reader)).thenReturn(0); // ustawiamy wartość zwracaną przez mocka przy dodaniu
-																	// czytelnika
 		ReadersController controller = new ReadersController(mockReaderService);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
 				.build();
@@ -76,7 +76,7 @@ public class ReadersControllerTest {
 				.param("firstName", "Zażółć")
 				.param("lastName", "Gęśląjazń"))
 		.andExpect(redirectedUrl("/readers"));// sprawdzamy czy nastąpiło przekierowanie
-		verify(mockReaderService, atLeastOnce()).addReader(refEq(reader)); // sprawdzenie czy została wywołana metoda
+		verify(mockReaderService, atLeastOnce()).addReader(reader); // sprawdzenie czy została wywołana metoda
 																			// addReader z danymi testowego czytelnika
 	}
 		
@@ -95,23 +95,22 @@ public class ReadersControllerTest {
 	
 	@Test
 	public void shouldEditReader() throws Exception{
-		Reader reader = new Reader("Zażółć", "Gęśląjazń"); // tworzymy testowego czytelnika
-		when(mockReaderService.updateReader(reader)).thenReturn(0); // ustawiamy wartość zwracaną przez mocka przy edycji czytlenika
+		Reader reader = new Reader("Zażółć", "Gęśląjaźń"); // tworzymy testowego czytelnika
 		ReadersController controller = new ReadersController(mockReaderService);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
 		mockMvc.perform(post("/readers/edit/0") //// mockujemy wywołanie dodawania czytelnika z zadanym imieniem i nazwiskiem
 				.param("id", "0")
 				.param("firstName", "Zażółć")
-				.param("lastName", "Gęśląjazń")
-				.param("active", "1"))
+				.param("lastName", "Gęśląjaźń")
+				.param("enabled", "1"))
 				.andExpect(redirectedUrl("/readers")); // sprawdzamy czy nastąpiło przekierowanie
-		verify(mockReaderService,atLeastOnce()).updateReader(refEq(reader));// sprawdzenie czy została wywołana metoda
+		verify(mockReaderService,atLeastOnce()).updateReader(reader);// sprawdzenie czy została wywołana metoda
 																			// updateReader z danymi testowego czytelnika
 			
 	}
 
-	public List<ReadersView> fakeReaderList(int size) { // metoda tworząca listę podaną czytelników (klasy ReadersView)
+	public List<ReadersView> fakeReadersList(int size) { // metoda tworząca listę podaną czytelników (klasy ReadersView)
 		List<ReadersView> list = new ArrayList<ReadersView>();
 		for (int i = 0; i < size; i++) {
 			list.add(new ReadersView("Imię " + i, "Nazwisko " + i));

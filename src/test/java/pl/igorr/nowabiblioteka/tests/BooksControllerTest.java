@@ -1,6 +1,8 @@
 package pl.igorr.nowabiblioteka.tests;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -45,20 +47,60 @@ public class BooksControllerTest {
 		
 		mockMvc.perform(get("/books")) // wywołanie widoku czytelników
 				.andExpect(view().name("books")) //sprawdzenie czy został wyświetlony właściwy widok...
-				.andExpect(model().attributeExists("bookList")) // ... z własciwym modelem ...
+				.andExpect(model().attributeExists("bookList")) // ... z właściwym modelem ...
 				.andExpect(model().attribute("bookList", hasItems(expectedBooks.toArray()))); // ... i elementami (hasItems z hamcrest-a)
 	}
 	
 	@Test
-	public void testAddBookPage() throws Exception {
+	public void shouldShowAddBookPage() throws Exception {
 		BooksController controller = new BooksController(mockBookService);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
 				.build();
 		mockMvc.perform(get("/books/add"))
 				.andExpect(view().name("bookForm")); // sprawdzamy czy wywołanie strony dodawania książki wyświetla właściwy widok
 	}
+	
+	@Test
+	public void shouldAddUser() throws Exception {
+		Book book = new Book("Zażółć","Gęśląjaźń",2000,5); //utworzenie wzorcowej książki	
+		BooksController controller = new BooksController(mockBookService);
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
+				.build();
+		mockMvc.perform(post("/books/add") //wywołanie dodania książki z parametrami odpowiadającymi książce wzorcowej
+				.param("title","Zażółć")
+				.param("author","Gęśląjaźń")
+				.param("year","2000")
+				.param("quantity","5"))
+			.andExpect(redirectedUrl("/books")); //sprawdzenie przekierowania
+		verify(mockBookService, atLeastOnce()).addBook(book); //sprawdzenie czy byłą wywołana metoda dodająca książkę wzorcową
+	}
+	
+	@Test
+	public void shouldShowEditBookPage() throws Exception {
+		Book book = new Book("Zażółć","Gęśląjaźń",2000,5); //utworzenie wzorcowej książki
+		when(mockBookService.getBook(0)).thenReturn(book); //ustalamy zwrócenie książki wzorcowej przy wywołaniu edycji ksiąski id=0
+		BooksController controller = new BooksController(mockBookService);
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+		mockMvc.perform(get("/books/edit/0"))  //wywołanie edycji książki nr 0
+				.andExpect(view().name("bookForm")) //sprawdzenie nazwy zwróconego widoku...
+				.andExpect(model().attributeExists("book")) //...obecności modelu book...
+				.andExpect(model().attribute("book", book)); //...oraz zgodności modelu z ze wzorem 
+	}
 
-	// TODO testy formularzy dodawania i edycji książek
+	@Test
+	public void shouldEditUser() throws Exception {
+		Book book = new Book("Zażółć","Gęśląjaźń",2000,5); //utworzenie wzorcowej książki	
+		BooksController controller = new BooksController(mockBookService);
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
+				.build();
+		mockMvc.perform(post("/books/edit/0") //wywołanie edycji książki z parametrami odpowiadającymi książce wzorcowej
+				.param("title","Zażółć")
+				.param("author","Gęśląjaźń")
+				.param("year","2000")
+				.param("quantity","5"))
+			.andExpect(redirectedUrl("/books")); //sprawdzenie przekierowania
+		verify(mockBookService, atLeastOnce()).updateBook(book); //sprawdzenie czy byłą wywołana metoda edytująca książkę wzorcową
+	}
 	
 	public List<Book> fakeBooksList(int size){ //metoda tworząca listę książek o zadanej długości
 		List<Book> list = new ArrayList<Book>();

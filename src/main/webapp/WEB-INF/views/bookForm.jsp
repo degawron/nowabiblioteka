@@ -25,18 +25,18 @@
 	</h2>
 	<sf:form method="POST" modelAttribute="book">
 		<sf:hidden path="id" />
-		<sf:input path="title" placeholder="Tytuł" />
+		<sf:input path="title" placeholder="Tytuł" cssErrorClass="error" /><br />
 		<sf:errors path="title" cssClass="error" />
 		<br />
-		<sf:input path="author" placeholder="Autor" />
+		<sf:input path="author" placeholder="Autor" cssErrorClass="error" /><br />
 		<sf:errors path="author" cssClass="error" />
 		<br />
 		<sf:label path="year">Rok:</sf:label><br />
-		<sf:input path="year" type="number" />
+		<sf:input path="year" type="number" cssErrorClass="error" /><br />
 		<sf:errors path="year" cssClass="error" />
 		<br />
 		<sf:label path="quantity">Ilość:</sf:label><br />
-		<sf:input path="quantity" type="number" />
+		<sf:input path="quantity" type="number" cssErrorClass="error" /><br />
 		<sf:errors path="quantity" cssClass="error" />
 		<br /><br />
 		<input type="submit" value="Zapisz" />

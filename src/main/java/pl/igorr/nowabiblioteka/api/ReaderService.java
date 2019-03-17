@@ -11,7 +11,7 @@ import pl.igorr.nowabiblioteka.domain.ReadersView;
 public interface ReaderService {
 
 	public List<ReadersView> listReaders();
-	public List<ReadersView> listActiveReaders();
+	public List<Reader> listActiveReaders();
 	public int addReader(Reader reader);
 	public Reader getReader(int id);
 	public int updateReader(Reader reader);

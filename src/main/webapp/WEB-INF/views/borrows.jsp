@@ -11,7 +11,9 @@
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-	<a class="add" href="<c:url value="/borrows/new" />">Nowe wypożyczenie</a>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<a class="add" href="<c:url value="/borrows/new" />">Nowe wypożyczenie</a>
+	</sec:authorize>
 	<table>
 		<tr>
 			<th style="width: 5%">ID</th>
@@ -46,7 +48,9 @@
 								pattern="dd-MM-yyyy" />
 						</c:when>
 						<c:otherwise>
-							<a href="<c:url value="/borrows/return/${borrow.id}" />">Zwróc</a>
+							<sec:authorize access="hasRole('ROLE_USER')">
+								<a href="<c:url value="/borrows/return/${borrow.id}" />">Zwróc</a>
+							</sec:authorize>
 						</c:otherwise>
 					</c:choose></td>
 			</tr>

@@ -7,13 +7,12 @@ import javax.validation.constraints.NotEmpty;
 import pl.igorr.nowabiblioteka.validation.MatchesConstraint;
 import pl.igorr.nowabiblioteka.validation.UniqueUserConstraint;
 
-@MatchesConstraint(firstField="password", secondField="confirmPassword", message="Brak zgodności hasła z potwierdzeniem")
+@MatchesConstraint(firstField="password", secondField="confirmPassword", message="Brak zgodności hasła z potwierdzeniem") //własny walidator sprawdzający zgodność hasła z potwierdzeniem
 public class UserDTO {
 	
-	public interface AddUser{};
-	public interface EditUser{};
-
-	@NotEmpty(message= "{user.username.notempty}", groups= {AddUser.class})
+	public interface AddUser{}; //pusty interfejs w celu umożliwienia używania wybiórczej walidacji (groups), wpisy oznaczone tym interfejsem będą sprawdzane tylko przy wskazanie grupy
+	
+	@NotEmpty(message= "{user.username.notempty}", groups= {AddUser.class}) 
 	@UniqueUserConstraint(message= "{user.username.uniqueuserconstraint}", groups= {AddUser.class}) //sprawdzanie czy użytkownik jest unikalny przez dodaną walidację
 	private String username;
 	

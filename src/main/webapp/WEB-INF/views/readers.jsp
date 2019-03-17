@@ -9,7 +9,9 @@
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-	<a class="add" href="<c:url value="/readers/add" />">Dodaj czytelnika</a>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<a class="add" href="<c:url value="/readers/add" />">Dodaj czytelnika</a>
+	</sec:authorize>
 	<table>
 		<tr>
 			<th style="width: 10%">ID</th>
@@ -27,7 +29,11 @@
 				<td><c:out value="${reader.lastName}" /></td>
 				<td><c:out value="${reader.borrows}" /></td>
 				<td><c:out value="${reader.notReturned}" /></td>
-				<td><a href="<c:url value="/readers/edit/${reader.id}" />">Edytuj</a></td>
+				<td>
+					<sec:authorize access="hasRole('ROLE_USER')">
+						<a href="<c:url value="/readers/edit/${reader.id}" />">Edytuj</a>
+					</sec:authorize>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

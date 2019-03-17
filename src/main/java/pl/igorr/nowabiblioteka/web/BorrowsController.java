@@ -46,7 +46,6 @@ public class BorrowsController {
 	
 	@RequestMapping (value="/new", method = RequestMethod.POST) //obsługa żadania GET w poniższej metodzie
 	public String newBorrow(Borrow borrow) {
-		System.out.println(borrow);
 		borrowService.borrowBook(borrow);
 		return "redirect:/borrows"; //zwrócenie nazwy widoku
 	}

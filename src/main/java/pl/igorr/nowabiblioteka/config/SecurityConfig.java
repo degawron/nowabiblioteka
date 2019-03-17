@@ -22,9 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // konfigurac
 			.authorizeRequests()//włączenie autoryzacji zapytań
 			.regexMatchers("/","/start").permitAll() //wykluczenie autoryzacji dla strony domowej
 			.regexMatchers("/resources/style.css").permitAll() //wykluczenie autoryzacji dla arkusza stylów
+			.regexMatchers("/readers/.*","/books/.*","/borrows/.*").hasAuthority("ROLE_USER") //ustawienie widoków dla których wymagane są uprawnienia użytkownika
+			.regexMatchers("/users.*").hasAuthority("ROLE_ADMIN") //ustawienie widoków dla których wymagane są uprawnienia administratora
 			.anyRequest().authenticated() //pozostałe adresy wymagają autoryzacji
 			.and().formLogin() //włączenie springowej strony logowania
 			.and().logout().logoutSuccessUrl("/") //po wylogowaniu przekierowanie na stronę startową
+			.and().exceptionHandling().accessDeniedPage("/errorpages/accessDenied.jsp") //ustawienie strony wyświetlanej dla 403 braku dostępu
 			.and().httpBasic(); //włączenie podstawowej autoryzacji HTTP
 		
 	}

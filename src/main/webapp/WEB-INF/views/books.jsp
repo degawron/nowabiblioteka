@@ -8,7 +8,9 @@
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-	<a class="add" href="<c:url value="/books/add" />">Dodaj książkę</a>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<a class="add" href="<c:url value="/books/add" />">Dodaj książkę</a>
+	</sec:authorize>
 	<table>
 		<tr>
 			<th style="width: 10%">ID</th>
@@ -25,7 +27,11 @@
 				<td><c:out value="${book.author}" /></td>
 				<td><c:out value="${book.year}" /></td>
 				<td><c:out value="${book.quantity}" /></td>
-				<td><a href="<c:url value="/books/edit/${book.id}" />">Edytuj</a></td>
+				<td>
+					<sec:authorize access="hasRole('ROLE_USER')">
+						<a href="<c:url value="/books/edit/${book.id}" />">Edytuj</a>
+					</sec:authorize>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

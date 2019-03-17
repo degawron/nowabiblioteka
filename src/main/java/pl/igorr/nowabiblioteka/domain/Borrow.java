@@ -101,5 +101,54 @@ public class Borrow {
 				+ dateOfReturn + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((book == null) ? 0 : book.hashCode());
+		result = prime * result + ((dateOfBorrow == null) ? 0 : dateOfBorrow.hashCode());
+		result = prime * result + ((dateOfReturn == null) ? 0 : dateOfReturn.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((reader == null) ? 0 : reader.hashCode());
+		result = prime * result + term;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Borrow other = (Borrow) obj;
+		if (book == null) {
+			if (other.book != null)
+				return false;
+		} else if (!book.equals(other.book))
+			return false;
+		if (dateOfBorrow == null) {
+			if (other.dateOfBorrow != null)
+				return false;
+		} else if (!dateOfBorrow.equals(other.dateOfBorrow))
+			return false;
+		if (dateOfReturn == null) {
+			if (other.dateOfReturn != null)
+				return false;
+		} else if (!dateOfReturn.equals(other.dateOfReturn))
+			return false;
+		if (id != other.id)
+			return false;
+		if (reader == null) {
+			if (other.reader != null)
+				return false;
+		} else if (!reader.equals(other.reader))
+			return false;
+		if (term != other.term)
+			return false;
+		return true;
+	}
+
 	
 }

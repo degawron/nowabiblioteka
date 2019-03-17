@@ -37,7 +37,7 @@
 		<sf:input type="date" path="dateOfBorrow" value="${date}" />		
 		<br />
 		Termin zwrotu:<br />
-		<sf:radiobutton path="term" value="7" />1 tydzień<br />
+		<sf:radiobutton path="term" value="7" checked="checked"/>1 tydzień<br />
 		<sf:radiobutton path="term" value="14" />2 tygodnie<br />
 		<sf:radiobutton path="term" value="30" />1 miesiąc<br />
 		<br />

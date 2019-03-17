@@ -47,7 +47,7 @@ public class BorrowServiceImpl implements BorrowService {
 		Book book = (Book) libraryDAO.get(Book.class, borrow.getBook().getId());
 		book.setQuantity(book.getQuantity()+1);
 		libraryDAO.update(book);
-		Borrow savedBorrow = (Borrow) libraryDAO.get(Borrow.class, borrow.getId());
+		Borrow savedBorrow = getBorrow(borrow.getId());
 		savedBorrow.setDateOfReturn(borrow.getDateOfReturn());
 		libraryDAO.update(savedBorrow);
 

@@ -25,10 +25,10 @@
 	</h2>
 	<sf:form method="POST" modelAttribute="reader">
 		<sf:hidden path="id" />
-		<sf:input path="firstName" placeholder="Imię" cssErrorClass="error" />
+		<sf:input path="firstName" placeholder="Imię" cssErrorClass="error" /><br />
 		<sf:errors path="firstName" cssClass="error" />
 		<br />
-		<sf:input path="lastName" placeholder="Nazwisko" cssErrorClass="error" />
+		<sf:input path="lastName" placeholder="Nazwisko" cssErrorClass="error" /><br />
 		<sf:errors path="lastName" cssClass="error" />
 		<br /><br />
 		<sf:hidden path="enabled" />
